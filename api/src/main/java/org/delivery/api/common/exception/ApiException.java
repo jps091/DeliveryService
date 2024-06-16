@@ -21,7 +21,7 @@ public class ApiException extends RuntimeException implements ApiExceptionIfs{
         this.errorDescription = errorDescription;
     }
 
-    public ApiException(Throwable cause, ErrorCodeIfs errorCodeIfs) {
+    public ApiException(ErrorCodeIfs errorCodeIfs, Throwable cause) {
         super(cause);
         this.errorCodeIfs = errorCodeIfs;
         this.errorDescription = errorCodeIfs.getDescription();
