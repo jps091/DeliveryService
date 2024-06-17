@@ -24,10 +24,10 @@ public class JwtTokenHelper implements TokenHelperIfs {
     @Value("${token.secret.key}")
     private String secretKey;
 
-    @Value("{token.access-token.plus-hour}")
+    @Value("${token.access-token.plus-hour}")
     private Long accessTokenPlusHour;
 
-    @Value("{token.refresh-token.plus-hour}")
+    @Value("${token.refresh-token.plus-hour}")
     private Long refreshTokenPlusHour;
 
     @Override
@@ -60,7 +60,7 @@ public class JwtTokenHelper implements TokenHelperIfs {
 
         SecretKey key = new SecretKeySpec(secretKey.getBytes(StandardCharsets.UTF_8), SignatureAlgorithm.HS256.getJcaName());
 
-        var jwtToken = Jwts.builder()
+        String jwtToken = Jwts.builder()
                 .signWith(key, SignatureAlgorithm.HS256)
                 .setClaims(data)
                 .setExpiration(expiredAt)
@@ -82,7 +82,7 @@ public class JwtTokenHelper implements TokenHelperIfs {
                 .build();
 
         try{
-            Jwe<Claims> result = parser.parseEncryptedClaims(token); // 복호화
+            Jws<Claims> result = parser.parseClaimsJws(token);// 복호화
             return new HashMap<>(result.getBody());
         }catch(Exception e){
             if(e instanceof SignatureException){
