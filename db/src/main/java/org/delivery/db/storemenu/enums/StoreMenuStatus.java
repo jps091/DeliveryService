@@ -1,4 +1,4 @@
-package org.delivery.db.storemenu;
+package org.delivery.db.storemenu.enums;
 
 import lombok.AllArgsConstructor;
 
