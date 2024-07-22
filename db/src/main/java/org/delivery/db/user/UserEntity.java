@@ -41,4 +41,5 @@ public class UserEntity extends BaseEntity {
     private LocalDateTime unregisteredAt;
 
     private LocalDateTime lastLoginAt;
+
 }
